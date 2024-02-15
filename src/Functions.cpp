@@ -76,15 +76,17 @@ NumericVector S(NumericVector t, const char * S_fun, NumericVector S_params) {
   return 1-cdf(t, S_fun, S_params);
 }
 
+// [[Rcpp::export]]
 NumericVector f(NumericVector t, const char * S_fun, NumericVector S_params) {
   return(pdf(t, S_fun, S_params));
 }
 
+// [[Rcpp::export]]
 NumericVector H(NumericVector t, const char * H_fun, NumericVector H_params) {
   return(cdf(t, H_fun, H_params));
 }
 
-
+// [[Rcpp::export]]
 NumericVector h(NumericVector t, const char * H_fun, NumericVector H_params) {
   return(pdf(t, H_fun, H_params));
 }
@@ -97,12 +99,10 @@ double inte(Function f, double lower, double upper, const char * S_fun, NumericV
   return result["value"];
 }
 
-// [[Rcpp::export]]
 NumericVector integrand_H_obs(NumericVector r, const char * S_fun, NumericVector S_params, const char * H_fun, NumericVector H_params) {
   return H(r,H_fun,H_params)*f(r,S_fun,S_params);
 }
 
-// [[Rcpp::export]]
 NumericVector H_obs(NumericVector t, const char * S_fun, NumericVector S_params, const char * H_fun, NumericVector H_params) {
   Function fun("integrand_H_obs");
   double Inf = -std::numeric_limits<double>::infinity();
@@ -121,13 +121,13 @@ NumericVector h_obs(NumericVector t, const char * S_fun, NumericVector S_params,
   return result;
 }
 
+// [[Rcpp::export]]
 NumericVector Y(NumericVector t, int n, double pi, const char * S_fun, NumericVector S_params, const char * H_fun, NumericVector H_params, double theta) {
   NumericVector Y_I=pmax(n*pi*S(t,S_fun,S_params)*(1-t/theta),0);
   NumericVector t_prev=t[Range(0,t.size()-2)];
   t_prev.push_front(0);
-  double num=1;
-  NumericVector result=cumsum((num/S(t,S_fun,S_params))*(H_obs(t,S_fun,S_params,H_fun,H_params)-H_obs(t_prev,S_fun,S_params,H_fun,H_params)));
-  NumericVector Y_P=pmax(result*n*(1-pi)*S(t,S_fun,S_params)*(1-H_obs(t-theta,S_fun,S_params,H_fun,H_params)),0);
+  double result=sum(S(t,S_fun,S_params)*(H(t,H_fun,H_params)-H(t_prev,H_fun,H_params)));
+  NumericVector Y_P=pmax(n*(1-pi)*S(t,S_fun,S_params)*(H(t,H_fun,H_params)-H(t-theta,H_fun,H_params))/result,0);
   return Y_P+Y_I;
 }
 
@@ -169,9 +169,10 @@ NumericVector W_helper(NumericVector t, double w_shape1, double w_shape2, double
   return pBeta_ab(t,w_shape1,w_shape2,0,tau);
 }
 
+// [[Rcpp::export]]
 double Opt_Fun(double tau, int n, double pi, const char * S_fun, NumericVector S_params, const char * H_fun, NumericVector H_params,
                double w_shape1, double w_shape2, double theta) {
-  NumericVector t=sequence(0,tau,0.01);
+  NumericVector t=sequence(0.0,tau,0.01);
   Rcpp::Environment ExtDist("package:ExtDist");
   Rcpp::Function pBeta_ab=ExtDist["pBeta_ab"];
   NumericVector t_prev=t[Range(0,t.size()-2)];
@@ -196,6 +197,8 @@ double Sol(double tau, int n, const char * S_fun, NumericVector S_params, const 
   }
   return pi_opt;
 }
+
+
 
 
 

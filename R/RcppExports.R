@@ -5,12 +5,20 @@ S <- function(t, S_fun, S_params) {
     .Call(`_Functions_S`, t, S_fun, S_params)
 }
 
-integrand_H_obs <- function(r, S_fun, S_params, H_fun, H_params) {
-    .Call(`_Functions_integrand_H_obs`, r, S_fun, S_params, H_fun, H_params)
+f <- function(t, S_fun, S_params) {
+    .Call(`_Functions_f`, t, S_fun, S_params)
 }
 
-H_obs <- function(t, S_fun, S_params, H_fun, H_params) {
-    .Call(`_Functions_H_obs`, t, S_fun, S_params, H_fun, H_params)
+H <- function(t, H_fun, H_params) {
+    .Call(`_Functions_H`, t, H_fun, H_params)
+}
+
+h <- function(t, H_fun, H_params) {
+    .Call(`_Functions_h`, t, H_fun, H_params)
+}
+
+Y <- function(t, n, pi, S_fun, S_params, H_fun, H_params, theta) {
+    .Call(`_Functions_Y`, t, n, pi, S_fun, S_params, H_fun, H_params, theta)
 }
 
 Var_Fun <- function(t, n, pi, S_fun, S_params, H_fun, H_params, theta) {
@@ -19,6 +27,10 @@ Var_Fun <- function(t, n, pi, S_fun, S_params, H_fun, H_params, theta) {
 
 W <- function(t, w_shape1, w_shape2, tau) {
     .Call(`_Functions_W`, t, w_shape1, w_shape2, tau)
+}
+
+Opt_Fun <- function(tau, n, pi, S_fun, S_params, H_fun, H_params, w_shape1, w_shape2, theta) {
+    .Call(`_Functions_Opt_Fun`, tau, n, pi, S_fun, S_params, H_fun, H_params, w_shape1, w_shape2, theta)
 }
 
 Sol <- function(tau, n, S_fun, S_params, H_fun, H_params, w_shape1, w_shape2, theta) {

@@ -23,33 +23,60 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// integrand_H_obs
-NumericVector integrand_H_obs(NumericVector r, const char * S_fun, NumericVector S_params, const char * H_fun, NumericVector H_params);
-RcppExport SEXP _Functions_integrand_H_obs(SEXP rSEXP, SEXP S_funSEXP, SEXP S_paramsSEXP, SEXP H_funSEXP, SEXP H_paramsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type r(rSEXP);
-    Rcpp::traits::input_parameter< const char * >::type S_fun(S_funSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type S_params(S_paramsSEXP);
-    Rcpp::traits::input_parameter< const char * >::type H_fun(H_funSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type H_params(H_paramsSEXP);
-    rcpp_result_gen = Rcpp::wrap(integrand_H_obs(r, S_fun, S_params, H_fun, H_params));
-    return rcpp_result_gen;
-END_RCPP
-}
-// H_obs
-NumericVector H_obs(NumericVector t, const char * S_fun, NumericVector S_params, const char * H_fun, NumericVector H_params);
-RcppExport SEXP _Functions_H_obs(SEXP tSEXP, SEXP S_funSEXP, SEXP S_paramsSEXP, SEXP H_funSEXP, SEXP H_paramsSEXP) {
+// f
+NumericVector f(NumericVector t, const char * S_fun, NumericVector S_params);
+RcppExport SEXP _Functions_f(SEXP tSEXP, SEXP S_funSEXP, SEXP S_paramsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
     Rcpp::traits::input_parameter< const char * >::type S_fun(S_funSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type S_params(S_paramsSEXP);
+    rcpp_result_gen = Rcpp::wrap(f(t, S_fun, S_params));
+    return rcpp_result_gen;
+END_RCPP
+}
+// H
+NumericVector H(NumericVector t, const char * H_fun, NumericVector H_params);
+RcppExport SEXP _Functions_H(SEXP tSEXP, SEXP H_funSEXP, SEXP H_paramsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
     Rcpp::traits::input_parameter< const char * >::type H_fun(H_funSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type H_params(H_paramsSEXP);
-    rcpp_result_gen = Rcpp::wrap(H_obs(t, S_fun, S_params, H_fun, H_params));
+    rcpp_result_gen = Rcpp::wrap(H(t, H_fun, H_params));
+    return rcpp_result_gen;
+END_RCPP
+}
+// h
+NumericVector h(NumericVector t, const char * H_fun, NumericVector H_params);
+RcppExport SEXP _Functions_h(SEXP tSEXP, SEXP H_funSEXP, SEXP H_paramsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< const char * >::type H_fun(H_funSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type H_params(H_paramsSEXP);
+    rcpp_result_gen = Rcpp::wrap(h(t, H_fun, H_params));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Y
+NumericVector Y(NumericVector t, int n, double pi, const char * S_fun, NumericVector S_params, const char * H_fun, NumericVector H_params, double theta);
+RcppExport SEXP _Functions_Y(SEXP tSEXP, SEXP nSEXP, SEXP piSEXP, SEXP S_funSEXP, SEXP S_paramsSEXP, SEXP H_funSEXP, SEXP H_paramsSEXP, SEXP thetaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< double >::type pi(piSEXP);
+    Rcpp::traits::input_parameter< const char * >::type S_fun(S_funSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type S_params(S_paramsSEXP);
+    Rcpp::traits::input_parameter< const char * >::type H_fun(H_funSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type H_params(H_paramsSEXP);
+    Rcpp::traits::input_parameter< double >::type theta(thetaSEXP);
+    rcpp_result_gen = Rcpp::wrap(Y(t, n, pi, S_fun, S_params, H_fun, H_params, theta));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -85,6 +112,26 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// Opt_Fun
+double Opt_Fun(double tau, int n, double pi, const char * S_fun, NumericVector S_params, const char * H_fun, NumericVector H_params, double w_shape1, double w_shape2, double theta);
+RcppExport SEXP _Functions_Opt_Fun(SEXP tauSEXP, SEXP nSEXP, SEXP piSEXP, SEXP S_funSEXP, SEXP S_paramsSEXP, SEXP H_funSEXP, SEXP H_paramsSEXP, SEXP w_shape1SEXP, SEXP w_shape2SEXP, SEXP thetaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type tau(tauSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< double >::type pi(piSEXP);
+    Rcpp::traits::input_parameter< const char * >::type S_fun(S_funSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type S_params(S_paramsSEXP);
+    Rcpp::traits::input_parameter< const char * >::type H_fun(H_funSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type H_params(H_paramsSEXP);
+    Rcpp::traits::input_parameter< double >::type w_shape1(w_shape1SEXP);
+    Rcpp::traits::input_parameter< double >::type w_shape2(w_shape2SEXP);
+    Rcpp::traits::input_parameter< double >::type theta(thetaSEXP);
+    rcpp_result_gen = Rcpp::wrap(Opt_Fun(tau, n, pi, S_fun, S_params, H_fun, H_params, w_shape1, w_shape2, theta));
+    return rcpp_result_gen;
+END_RCPP
+}
 // Sol
 double Sol(double tau, int n, const char * S_fun, NumericVector S_params, const char * H_fun, NumericVector H_params, double w_shape1, double w_shape2, double theta);
 RcppExport SEXP _Functions_Sol(SEXP tauSEXP, SEXP nSEXP, SEXP S_funSEXP, SEXP S_paramsSEXP, SEXP H_funSEXP, SEXP H_paramsSEXP, SEXP w_shape1SEXP, SEXP w_shape2SEXP, SEXP thetaSEXP) {
@@ -107,10 +154,13 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_Functions_S", (DL_FUNC) &_Functions_S, 3},
-    {"_Functions_integrand_H_obs", (DL_FUNC) &_Functions_integrand_H_obs, 5},
-    {"_Functions_H_obs", (DL_FUNC) &_Functions_H_obs, 5},
+    {"_Functions_f", (DL_FUNC) &_Functions_f, 3},
+    {"_Functions_H", (DL_FUNC) &_Functions_H, 3},
+    {"_Functions_h", (DL_FUNC) &_Functions_h, 3},
+    {"_Functions_Y", (DL_FUNC) &_Functions_Y, 8},
     {"_Functions_Var_Fun", (DL_FUNC) &_Functions_Var_Fun, 8},
     {"_Functions_W", (DL_FUNC) &_Functions_W, 4},
+    {"_Functions_Opt_Fun", (DL_FUNC) &_Functions_Opt_Fun, 10},
     {"_Functions_Sol", (DL_FUNC) &_Functions_Sol, 9},
     {NULL, NULL, 0}
 };
