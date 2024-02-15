@@ -16,6 +16,8 @@ NumericVector pdf_exp(NumericVector t, NumericVector params) {return dweibull(t,
 NumericVector cdf_exp(NumericVector t, NumericVector params) {return pweibull(t,1,params(0));}
 NumericVector pdf_gamma(NumericVector t, NumericVector params) {return dgamma(t,params(1),params(2));}
 NumericVector cdf_gamma(NumericVector t, NumericVector params) {return pgamma(t,params(1),params(2));}
+NumericVector pdf_unif(NumericVector t, NumericVector params) {return dunif(t,params(6),params(7));}
+NumericVector cdf_unif(NumericVector t, NumericVector params) {return punif(t,params(6),params(7));}
 NumericVector pdf_gomp(NumericVector t, NumericVector params) {
   Rcpp::Environment flexsurv("package:flexsurv");
   Rcpp::Function dgompertz=flexsurv["dgompertz"];
@@ -52,6 +54,8 @@ NumericVector pdf(NumericVector t, const char * val, NumericVector params) {
     pdf=pdf_lnorm(t,params);
   } else if(std::strcmp(val,"Weibull")==0) {
     pdf=pdf_weibull(t,params);
+  } else if(std::strcmp(val,"Uniform")==0) {
+    pdf=pdf_unif(t,params);
   }
   return pdf;
 }
@@ -67,6 +71,8 @@ NumericVector cdf(NumericVector t, const char * val, NumericVector params) {
     cdf=cdf_lnorm(t,params);
   } else if(std::strcmp(val,"Weibull")==0) {
     cdf=cdf_weibull(t,params);
+  } else if(std::strcmp(val,"Uniform")==0) {
+    cdf=cdf_unif(t,params);
   }
   return cdf;
 }
